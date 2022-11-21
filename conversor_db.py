@@ -21,7 +21,7 @@ def conv_dBmtodB(value):
     return result
 
 def conv_dBtoWatt(value):
-    result = math.pow(10, value/10)  #10^((value)/10)) #formula example
+    result = math.pow(10, value/10)   #formula example
     return result
 
 def conv_Watt_todB(index, value):
@@ -64,8 +64,14 @@ with col2:
         if(choice1 == 'dB'):
             calculus = conv_dBtoWatt(numberField)
 
-    elif(choice1 == 'dBm'):
-        calculus = conv_dBtoWatt(numberField-30)
+        elif(choice1 == 'dBm'):
+            calculus = conv_dBtoWatt(numberField-30)
+
+        else:
+            calculus = numberField*(10 ** index1[array1.index(choice1)]) # multiplo d W para W -> erro resultado 0
 
     if clicked and calculus != -1:
-        result = st.success(f"{calculus: .3f} {choice2}")
+        if calculus < 0.01:
+            result = st.success(f"{calculus: .9f} {choice2}")
+        else:
+            result = st.success(f"{calculus: .3f} {choice2}")
