@@ -44,7 +44,7 @@ with col2:
     st.write("")
 
     if array1.index(choice1) >= 2 and numberField == 0:
-        st.error('Nao pode ser zero')
+        st.error('Nao pode ser zero!')
     else:
         if choice1 == choice2:
             calculus = numberField
