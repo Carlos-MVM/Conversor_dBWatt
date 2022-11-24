@@ -33,7 +33,7 @@ with col1:
     array1 = ["dB", "dBm", "nW", "uW", "mW", "W", "kW", "MW", "GW"]
     choice1 = st.selectbox("Escolha uma unidade", array1, key= 'db1')
     numberField = st.number_input(
-        "Digite um valor", -100.0, 200.0, key = 'nF1',
+        "Digite um valor", -1000.0, 2000.0, key = 'nF1',
         value=10.0
     )
     clicked = st.button("Converter")
@@ -42,36 +42,41 @@ with col2:
     array2 = ["dBm", "dB", "W"]
     choice2 = st.selectbox("Escolha uma unidade", array2, key = 'db2')
     st.write("")
-    if choice1 == choice2:
-        calculus = numberField
 
-    elif choice1 == 'dB' and choice2 == 'dBm':
-        calculus = conv_dBtodBm(numberField)
+    if array1.index(choice1) >= 2 and numberField == 0:
+        st.error('Nao pode ser zero')
+    else:
+        if choice1 == choice2:
+            calculus = numberField
 
-    elif choice1 == 'dBm' and choice2 == 'dB':
-        calculus = conv_dBmtodB(numberField)
+        elif choice1 == 'dB' and choice2 == 'dBm':
+            calculus = conv_dBtodBm(numberField)
 
-    elif choice2 == 'dB': #watts to db
-        if(array1.index(choice1) >= 2):
-            calculus = conv_Watt_todB(array1.index(choice1), numberField)
+        elif choice1 == 'dBm' and choice2 == 'dB':
+            calculus = conv_dBmtodB(numberField)
+
+        elif choice2 == 'dB': #watts to db
+            if(array1.index(choice1) >= 2):
+                calculus = conv_Watt_todB(array1.index(choice1), numberField)
 
 
-    elif choice2 == 'dBm': #watts to dbm
-        if(array1.index(choice1) >= 2):
-            calculus = conv_Watt_todB(array1.index(choice1), numberField) + 30
+        elif choice2 == 'dBm': #watts to dbm
+            if(array1.index(choice1) >= 2):
+                calculus = conv_Watt_todB(array1.index(choice1), numberField) + 30
 
-    elif choice2 == 'W': #db  or dbm to watts
-        if(choice1 == 'dB'):
-            calculus = conv_dBtoWatt(numberField)
+        elif choice2 == 'W': #db  or dbm to watts
+            if(choice1 == 'dB'):
+                calculus = conv_dBtoWatt(numberField)
 
-        elif(choice1 == 'dBm'):
-            calculus = conv_dBtoWatt(numberField-30)
+            elif(choice1 == 'dBm'):
+                calculus = conv_dBtoWatt(numberField-30)
 
-        else:
-            calculus = numberField*(10 ** index1[array1.index(choice1)]) # multiplo d W para W -> erro resultado 0
+            else:
+                calculus = numberField*(10 ** index1[array1.index(choice1)]) # multiplo d W para W -> erro resultado 0
 
-    if clicked and calculus != -9999:
-        if calculus < 0.01:
-            result = st.success(f"{calculus: .9f} {choice2}")
-        else:
-            result = st.success(f"{calculus: .3f} {choice2}")
+        if clicked and calculus != -9999:
+
+            if calculus < 0.01:
+               result = st.success(f"{calculus: .9f} {choice2}")
+            else:
+                result = st.success(f"{calculus: .3f} {choice2}")
