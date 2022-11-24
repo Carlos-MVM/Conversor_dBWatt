@@ -33,7 +33,7 @@ with col1:
     array1 = ["dB", "dBm", "nW", "uW", "mW", "W", "kW", "MW", "GW"]
     choice1 = st.selectbox("Escolha uma unidade", array1, key= 'db1')
     numberField = st.number_input(
-        "Digite um valor", -1000.0, 2000.0, key = 'nF1',
+        "Insira o valor", -1000.0, 2000.0, key = 'nF1',
         value=10.0
     )
     clicked = st.button("Converter")
