@@ -7,7 +7,7 @@ st.title("Conversor dB Watt")
 
 #variables
 col1, col2 = st.columns([1,1])
-calculus = -1
+calculus = -9999
 global index1
 index1 = [0, 0, -9, -6, -3, 0, 3, 6, 9]
 
@@ -70,7 +70,7 @@ with col2:
         else:
             calculus = numberField*(10 ** index1[array1.index(choice1)]) # multiplo d W para W -> erro resultado 0
 
-    if clicked and calculus != -1:
+    if clicked and calculus != -9999:
         if calculus < 0.01:
             result = st.success(f"{calculus: .9f} {choice2}")
         else:
