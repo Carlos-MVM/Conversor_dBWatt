@@ -43,8 +43,8 @@ with col2:
     choice2 = st.selectbox("Escolha uma unidade", array2, key = 'db2')
     st.write("")
 
-    if array1.index(choice1) >= 2 and numberField == 0:
-        st.error('Nao pode ser zero!')
+    if array1.index(choice1) >= 2 and numberField <= 0 and (choice2 == 'dB' or choice2 =='dBm'):
+        st.error('Nao pode ser zero, nem negativo!')
     else:
         if choice1 == choice2:
             calculus = numberField
